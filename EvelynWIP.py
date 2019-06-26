@@ -51,3 +51,26 @@ for i in range(0,len(master_log.loc[2,'spike_times'])):
         if (pos[j] <= float(master_log.loc[2,'spike_times'][i])-float(master_log.loc[2,'stim_onset'])) and (pos[j+1] >= float(master_log.loc[2,'spike_times'][i])-float(master_log.loc[2,'stim_onset'])):
             new_col[j]+=1
 C2 = new_col
+
+#June 26: Rewrite code for histogram frequency
+#Recreate column '-1to3sec_25msecbins_StimAligned'
+import pandas as pd
+import numpy as np
+import pickle
+from pathlib import Path
+data_folder = Path('Z:\\Maxime Chevee\Maxime 3\Analysis\Analysis OptoTagged 20180411')
+file_to_open = data_folder / "master_log_lite.pkl"
+with open(file_to_open, 'rb') as f:
+    master_log = pickle.load(f, encoding='latin1')
+
+#Subtract stimulus onset from spike times
+adjusted_spike_times = master_log.loc[:'spike_times']-float(master_log.loc['stim_onset'])
+
+#Create histogram of aligned spike times
+
+#Calculate the number of bins for time interval
+num_bins = int((3-(-1))/0.025-1)
+histogram = master_log.hist(bins=num_bins)
+hist_freq = list(histogram)
+master_log['-1to3sec_25msecbins_StimAligned'] = hist_freq
+
