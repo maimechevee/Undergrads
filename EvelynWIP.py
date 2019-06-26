@@ -53,6 +53,7 @@ for i in range(0,len(master_log.loc[2,'spike_times'])):
 C2 = new_col
 
 #June 26: Rewrite code for histogram frequency
+#Checking needed
 #Recreate column '-1to3sec_25msecbins_StimAligned'
 import pandas as pd
 import numpy as np
