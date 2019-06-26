@@ -5,7 +5,7 @@ Created on Mon Jun 24 12:00:44 2019
 @author: Brown Lab
 """
 
-#This is Evelyn's wrok in progress
+#This is Evelyn's work in progress
 
 #Recreate column '-1to3sec_25msecbins_StimAligned'
 import pandas as pd
