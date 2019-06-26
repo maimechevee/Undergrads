@@ -74,3 +74,4 @@ histogram = master_log.hist(bins=num_bins)
 hist_freq = list(histogram)
 master_log['-1to3sec_25msecbins_StimAligned'] = hist_freq
 
+#June 26: Create raster according to the histogram
