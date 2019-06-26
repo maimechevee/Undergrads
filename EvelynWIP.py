@@ -86,5 +86,22 @@ for num in range(1, len(master_log.loc[:,'mouse_name'])+1):
     hist = np.histogram(adjusted_spike_times, bins=int((3-(-1))/0.025-1))
     L.append(hist)
 master_log['-1to3sec_25msecbins_StimAligned'] = L
+#Draft 3: June 26
+#Recreate column '-1to3sec_25msecbins_StimAligned'
+#Set edges for 
+import pandas as pd
+import numpy as np
+import pickle
+from pathlib import Path
+data_folder = Path('Z:\\Maxime Chevee\Maxime 3\Analysis\Analysis OptoTagged 20180411')
+file_to_open = data_folder / "master_log_lite.pkl"
+with open(file_to_open, 'rb') as f:
+    master_log = pickle.load(f, encoding='latin1')
+L = []
+for num in range(1, len(master_log.loc[:,'mouse_name'])+1):
+    adjusted_spike_times = master_log.loc[num,'spike_times']-float(master_log.loc[num,'stim_onset'][num-1][0][0][0][0])
+    hist = np.histogram(adjusted_spike_times, bins=int((3-(-1))/0.025-1), range=(-1,3))
+    L.append(hist)
+master_log['-1to3sec_25msecbins_StimAligned'] = L
 #June 26: Create raster for one neuron
 import matplotlib.pyplot as plt
