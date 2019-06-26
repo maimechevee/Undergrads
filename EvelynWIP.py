@@ -62,16 +62,11 @@ data_folder = Path('Z:\\Maxime Chevee\Maxime 3\Analysis\Analysis OptoTagged 2018
 file_to_open = data_folder / "master_log_lite.pkl"
 with open(file_to_open, 'rb') as f:
     master_log = pickle.load(f, encoding='latin1')
-
-#Subtract stimulus onset from spike times
-adjusted_spike_times = master_log.loc[:'spike_times']-float(master_log.loc['stim_onset'])
-
-#Create histogram of aligned spike times
-
-#Calculate the number of bins for time interval
-num_bins = int((3-(-1))/0.025-1)
-histogram = master_log.hist(bins=num_bins)
-hist_freq = list(histogram)
-master_log['-1to3sec_25msecbins_StimAligned'] = hist_freq
+L = []
+for num in range(1, len(master_log.loc[:,'mouse_name'])+1):
+    adjusted_spike_times = master_log.loc[num,'spike_times']-float(master_log.loc[num,'stim_onset'])
+    histogram = adjusted_spike_times.hist(bins=int((3-(-1))/0.025-1))
+    L.append(histogram)
+master_log['-1to3sec_25msecbins_StimAligned'] = L
 
 #June 26: Create raster according to the histogram
