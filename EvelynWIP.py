@@ -70,6 +70,4 @@ for num in range(1, len(master_log.loc[:,'mouse_name'])+1):
     L.append(histogram)
 master_log['-1to3sec_25msecbins_StimAligned'] = L
 
-#June 26: Create raster according to the histogram
-import rasterio
-from rasterio.plot import show
+#June 26: Create raster for one neuron
