@@ -16,3 +16,13 @@ for i in range(0,len(master_log.spike_times)):
     hist = np.histogram(modified_spike_times[i], bins=159, range = (-1,3))[0]
     L.append(hist)
 L
+
+import matplotlib.pyplot as plt
+selected_neuron = master_log[master_log.unit_name == 'Cl6_11-02-17_TT6clst1']
+modified_spike = selected_neuron.spike_times - selected_neuron.stim_onset
+yvar = selected_neuron.trial_num
+for i in range(0,len(modified_spike)):
+   x = modified_spike[modified_spike.index[i]]
+   y = np.tile(int(yvar[yvar.index[i]]), len(x))
+    plt.scatter(x, y, color = 'red')
+plt.xlim(-1,3)
