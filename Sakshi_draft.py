@@ -61,4 +61,3 @@ with open(file_to_open, 'rb') as f:
    master_log = pickle.load(f, encoding='latin1')
 
 import matplotlib.pyplot as plt
-
